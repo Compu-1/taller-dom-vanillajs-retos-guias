@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taller y Retos: DOM, Componentes y Eventos en Vanilla JS · Compu 1</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2.5rem 1.5rem;
+      background: #0b1120;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #1e293b;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(84, 84, 233, 0.15);
+      color: #818cf8;
+      border: 1px solid #6366f1;
+      padding: 0.35rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    h1 { font-size: 2.2rem; margin: 0.5rem 0; color: #f8fafc; }
+    .subtitle { color: #94a3b8; font-size: 1.1rem; max-width: 700px; margin: 0.5rem auto 1.5rem; line-height: 1.5; }
+    .links-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-portal {
+      background: #5454e9;
+      color: white;
+      text-decoration: none;
+      padding: 0.65rem 1.35rem;
+      border-radius: 8px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .btn-portal:hover { background: #4338ca; }
+    .btn-pdf {
+      background: #1e293b;
+      color: #f1f5f9;
+      text-decoration: none;
+      padding: 0.65rem 1.35rem;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid #334155;
+      transition: all 0.2s;
+    }
+    .btn-pdf:hover { background: #334155; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #38bdf8;
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+    .card h3 { margin: 0 0 0.5rem 0; font-size: 1.15rem; color: #f1f5f9; }
+    .card p { margin: 0 0 1rem 0; font-size: 0.88rem; color: #94a3b8; line-height: 1.5; flex-grow: 1; }
+    .card-footer {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="hero-badge">UNIVERSIDAD ICESI · COMPU 1 (2026-2)</div>
+      <h1>Manipulación del DOM, Componentes y Eventos</h1>
+      <p class="subtitle">Guías y 6 Retos Prácticos Interactivos en Vanilla JavaScript puro para las Sesiones 26, 27 y 28 (RAA 3).</p>
+      <div class="links-bar">
+        <a class="btn-portal" href="http://192.168.131.10/iaslab/compu1/docs/talleres/taller-dom-vanillajs-componentes/" target="_blank">🌐 Ver Portal Docusaurus en Vivo</a>
+        <a class="btn-pdf" href="guias/Taller_DOM_VanillaJS_Componentes_Eventos.pdf" target="_blank">📄 Descargar Guía en PDF</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <a class="card" href="retos/01-dom-seguro-xss/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(22, 163, 74, 0.2); color: #4ade80;">DOM & Seguridad</span>
+          <h3>1. Manipulación Segura y Prevención XSS</h3>
+          <p>Construcción imperativa con document.createElement() y neutralización de ataques XSS con textContent.</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 1 →</div>
+      </a>
+
+      <a class="card" href="retos/02-componentes-funcionales/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(2, 132, 199, 0.2); color: #38bdf8;">Componentes & Estado</span>
+          <h3>2. Componentes Funcionales y Flujo Unidireccional</h3>
+          <p>Funciones puras reutilizables, comunicación descendente (props) y ascendente por callbacks.</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 2 →</div>
+      </a>
+
+      <a class="card" href="retos/03-delegacion-eventos/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(134, 92, 240, 0.2); color: #a78bfa;">Eventos & Rendimiento</span>
+          <h3>3. Delegación de Eventos con closest()</h3>
+          <p>Manejo de eventos eficiente con un único listener en el contenedor padre para listas dinámicas.</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 3 →</div>
+      </a>
+
+      <a class="card" href="retos/04-promesas-asincronia/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(240, 104, 26, 0.2); color: #fb923c;">Asincronía & Red</span>
+          <h3>4. Asincronía: Promesas, Async/Await</h3>
+          <p>Ciclo de vida no bloqueante: estados Pending, Fulfilled y Rejected con bloque finally.</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 4 →</div>
+      </a>
+
+      <a class="card" href="retos/05-waapi-animaciones-svg/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(76, 185, 120, 0.2); color: #4ade80;">Animaciones & SVG</span>
+          <h3>5. Web Animations API (WAAPI) y SVG</h3>
+          <p>Animaciones GPU nativas con element.animate() y control de trazo circular mediante strokeDashoffset.</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 5 →</div>
+      </a>
+
+      <a class="card" href="retos/06-modo-estricto-diagnostico/index.html">
+        <div>
+          <span class="card-badge" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">Modo Estricto & ES6</span>
+          <h3>6. Modo Estricto ("use strict")</h3>
+          <p>Detección temprana de variables no declaradas y mutaciones de objetos inmutables con Object.freeze().</p>
+        </div>
+        <div class="card-footer">Ejecutar Reto 6 →</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

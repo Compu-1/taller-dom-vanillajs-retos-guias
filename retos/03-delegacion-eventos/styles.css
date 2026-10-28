@@ -1,0 +1,53 @@
+.services-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+      .service-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: opacity 0.3s ease;
+      }
+      .service-row.paused {
+        opacity: 0.5;
+        border-color: #64748b;
+      }
+      .service-name {
+        font-weight: 600;
+        color: #f1f5f9;
+        font-size: 0.95rem;
+      }
+      .badge-state {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 700;
+        margin-left: 0.5rem;
+      }
+      .badge-state.online {
+        background: #065f46;
+        color: #6ee7b7;
+      }
+      .badge-state.offline {
+        background: #7f1d1d;
+        color: #fca5a5;
+      }
+      .actions-group {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .btn-sm {
+        cursor: pointer;
+        padding: 0.35rem 0.65rem;
+        border-radius: 4px;
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .btn-toggle { background: #0284c7; color: white; }
+      .btn-remove { background: #b91c1c; color: white; }

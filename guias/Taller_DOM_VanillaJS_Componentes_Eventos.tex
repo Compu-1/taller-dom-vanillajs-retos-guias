@@ -1,0 +1,317 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla,es-noquoting]{babel}
+\usepackage{geometry}
+\geometry{margin=0.64in, top=0.74in, bottom=0.65in, headheight=36pt, headsep=14pt}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{lastpage}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{tcolorbox}
+
+% Tipografía institucional Icesi (Sans-Serif Helvetica)
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Interlineado aumentado un 30% (setstretch 1.38)
+\setstretch{1.38}
+
+% Altura de celdas en tablas
+\renewcommand{\arraystretch}{1.25}
+
+% Paleta de Colores Oficial de los Programas Icesi
+\definecolor{icesiBlue}{HTML}{5454E9}       % Azul vibrante institucional
+\definecolor{icesiOrange}{HTML}{F0681A}     % Naranja acento
+\definecolor{icesiGreen}{HTML}{4CB978}      % Verde acento
+\definecolor{icesiPurple}{HTML}{865CF0}     % Púrpura acento
+\definecolor{icesiDark}{HTML}{1A1A1A}       % Texto principal oscuro
+\definecolor{icesiMuted}{HTML}{6B7280}      % Gris metadatos
+\definecolor{icesiBorder}{HTML}{D1D5DB}     % Líneas y bordes
+\definecolor{icesiRowLine}{HTML}{E5E7EB}    % Líneas de tabla
+\definecolor{icesiLight}{HTML}{F9FAFB}      % Fondo suave
+\definecolor{codeBackground}{HTML}{F3F4F6}  % Fondo código
+
+% Configuración de Listings
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, switch, var, if, in, while, do, else, case, break, const, let, async, await, import, export, from, default, try, throw, class, extends, super},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinestyle{jsstyle}{
+    language=JavaScript,
+    backgroundcolor=\color{codeBackground},
+    commentstyle=\color{icesiMuted}\itshape,
+    keywordstyle=\color{icesiBlue}\bfseries,
+    stringstyle=\color{icesiOrange},
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{icesiBorder},
+    showstringspaces=false
+}
+
+\lstdefinestyle{bashstyle}{
+    backgroundcolor=\color{codeBackground},
+    commentstyle=\color{icesiMuted}\itshape,
+    keywordstyle=\color{icesiBlue}\bfseries,
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{icesiBorder},
+    language=bash,
+    showstringspaces=false
+}
+
+\lstset{
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=%
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+
+% =========================================================================
+% ENCABEZADO Y PIE DE PÁGINA ESTILO PROGRAMA DE CURSO ICESI
+% =========================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{%
+  \begin{minipage}[c]{2.8cm}
+    \includegraphics[height=0.58cm]{logo-icesi.png}
+  \end{minipage}%
+  \hspace{0.15cm}%
+  {\color{icesiBorder}\vrule width 0.8pt height 0.60cm}%
+  \hspace{0.2cm}%
+  \begin{minipage}[c]{10.5cm}
+    \fontsize{7.5}{9.5}\selectfont\textbf{\color{icesiDark}UNIVERSIDAD ICESI} \\
+    \fontsize{7}{9}\selectfont\textbf{\color{icesiDark}GUÍA DE TALLER PRÁCTICO: COMPUTACIÓN EN INTERNET I} \\
+    \fontsize{6.5}{8.5}\selectfont\color{icesiMuted}Período: 2026-2 $\bullet$ NRC: 12378 / 12377 $\bullet$ Modalidad: Equipos de 2 Estudiantes
+  \end{minipage}%
+}
+\fancyhead[R]{\fontsize{7.5}{9.5}\selectfont\color{icesiMuted}Pág. \thepage\ de \pageref{LastPage}}
+
+% Barra horizontal multicolor
+\renewcommand{\headrule}{%
+  \vspace{0.08cm}%
+  \noindent%
+  \textcolor{icesiBlue}{\rule{0.60\textwidth}{1.8pt}}%
+  \textcolor{icesiOrange}{\rule{0.18\textwidth}{1.8pt}}%
+  \textcolor{icesiGreen}{\rule{0.11\textwidth}{1.8pt}}%
+  \textcolor{icesiPurple}{\rule{0.11\textwidth}{1.8pt}}%
+}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[L]{\fontsize{7.5}{9.5}\selectfont\color{icesiMuted}Computación en Internet I (09810 - TIC) $\bullet$ Taller: DOM, Componentes, Eventos y Asincronía en Vanilla JS}
+\fancyfoot[R]{\fontsize{7.5}{9.5}\selectfont\color{icesiMuted}Universidad Icesi $\bullet$ DCSI}
+
+% =========================================================================
+% COMANDOS DE SECCIONES CON BADGE ESTILO PROGRAMA ICESI
+% =========================================================================
+\newcommand{\sectionBadge}[1]{%
+  \refstepcounter{section}%
+  \vspace{0.24cm}%
+  \noindent%
+  \colorbox{icesiBlue}{\color{white}\rule[-0.08cm]{0pt}{0.42cm}\hspace{0.16cm}\textbf{\normalsize \thesection}\hspace{0.16cm}}%
+  \hspace{0.18cm}%
+  {\fontsize{9.5}{12}\selectfont\textbf{\color{icesiDark}#1}}\\[-0.10cm]%
+  \noindent{\color{icesiDark}\rule{\textwidth}{0.8pt}}\vspace{0.10cm}%
+}
+
+\titleformat{\subsection}
+  {\color{icesiBlue}\normalfont\normalsize\bfseries}
+  {\thesubsection}{0.4em}{}
+\titlespacing*{\subsection}{0pt}{0.6ex plus 0.2ex minus .1ex}{0.2ex plus .1ex}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\begin{document}
+\shorthandoff{"}
+
+% =========================================================================
+% TÍTULO Y PRESENTACIÓN INICIAL
+% =========================================================================
+\noindent
+{\fontsize{8.5}{11}\selectfont\textbf{\color{icesiBlue}TALLER PRÁCTICO FORMATIVO: ARQUITECTURA WEB CLIENTE · SESIONES 26 A 28}}\\[0.06cm]
+{\fontsize{13.5}{17}\selectfont\textbf{Manipulación del DOM, Componentes Reutilizables, Eventos, Promesas y Animaciones en Vanilla JS}}\\[0.10cm]
+{\color{icesiRowLine}\hrule height 0.6pt}\vspace{0.10cm}
+
+\noindent
+{\color{icesiBlue}\textbf{\rule{2.5pt}{8.5pt}}}~\textbf{\fontsize{8.5}{11}\selectfont FACULTAD DE INGENIERÍA, DISEÑO Y CIENCIAS APLICADAS} \hfill
+{\color{icesiOrange}\textbf{\rule{2.5pt}{8.5pt}}}~\textbf{\fontsize{8.5}{11}\selectfont DEPARTAMENTO DE COMPUTACIÓN Y SISTEMAS INTELIGENTES}\\[0.06cm]
+{\color{icesiRowLine}\hrule height 0.6pt}\vspace{0.10cm}
+
+% =========================================================================
+% TABLA DE IDENTIFICACIÓN
+% =========================================================================
+\noindent
+{\color{icesiBlue}\textbf{\rule{2.5pt}{8.5pt}}}~\textbf{\fontsize{8.5}{11}\selectfont INFORMACIÓN GENERAL} \hfill {\fontsize{7.5}{9}\selectfont\color{icesiMuted}\textbf{IDENTIFICACIÓN DEL CURSO}}\\[-0.22cm]
+{\color{icesiBorder}\hrule height 0.5pt}\vspace{0.05cm}
+
+\noindent
+\small
+\begin{tabularx}{\textwidth}{>{\bfseries\color{icesiDark}\fontsize{7.5}{9.5}\selectfont}L{2.6cm}X!{\color{icesiBlue}\vrule width 0.8pt}>{\bfseries\color{icesiDark}\fontsize{7.5}{9.5}\selectfont}L{2.6cm}X}
+CÓDIGO: & 09810 - TIC & PERÍODO: & 202620 (Semestre 2026-2) \\ \hline
+\rowcolor{icesiLight}
+NRC / GRUPO: & 12378 / 12377 (Grupos 001 y 003) & CARÁCTER: & Práctico Formativo y Aplicado \\ \hline
+MODALIDAD: & Equipos de 2 Estudiantes & DURACIÓN: & 2 Horas en Clase + Cierre Autónomo \\ \hline
+\rowcolor{icesiLight}
+POLÍTICA IAG: & Nivel 2: Asistencia de Consulta y Depuración & PONDERACIÓN: & Formativo (Alineación RAA 3 / Preparación Parcial 3) \\ \hline
+ESTUDIANTE 1: & \rule{4.5cm}{0.4pt} & CÓDIGO: & \rule{2.2cm}{0.4pt} \\ \hline
+\rowcolor{icesiLight}
+ESTUDIANTE 2: & \rule{4.5cm}{0.4pt} & CÓDIGO: & \rule{2.2cm}{0.4pt} \\ \hline
+\end{tabularx}
+
+\vspace{0.10cm}
+
+% =========================================================================
+% SECCION 1: CONTEXTO Y STRICT MODE
+% =========================================================================
+\sectionBadge{Contexto: Modo Estricto y Manipulación Reactiva del DOM}
+
+En el desarrollo web moderno, las interfaces de usuario no se conciben como documentos estáticos impresos, sino como \textbf{aplicaciones reactivas en memoria}. Comprender las bases de Vanilla JavaScript permite al ingeniero construir interfaces de alto rendimiento, dominar el ciclo de vida del navegador y comprender con precisión qué ocurre por debajo de cualquier framework contemporáneo.
+
+\begin{tcolorbox}[colback=icesiOrange!10,colframe=icesiOrange,arc=3pt,title=\textbf{Directiva de Seguridad: Modo Estricto ("use strict")}]
+\fontsize{7.5}{9.5}\selectfont
+El Modo Estricto transforma errores silenciosos y conductas inseguras en excepciones explícitas inmediatas (\texttt{throw error}). Prohíbe variables globales accidentales (\texttt{x = 10} sin declarar lanza \texttt{ReferenceError}), asigna \texttt{undefined} a \texttt{this} en funciones sueltas y previene colisiones en compiladores JIT (V8). En módulos ES6 nativos (\texttt{<script type="module">}), el modo estricto está habilitado de forma automática e irrevocable.
+\end{tcolorbox}
+
+\subsection{Mutación Limpia vs. Antipatrones Inseguros}
+El uso indiscriminado de \texttt{element.innerHTML = "..."} destruye listeners previos, genera vulnerabilidades de inyección de código (\textbf{Cross-Site Scripting - XSS}) y satura el motor gráfico con múltiples ciclos de \emph{Reflow} (cálculo geométrico) y \emph{Repaint} (redibujado de píxeles).
+
+\begin{lstlisting}[style=jsstyle]
+"use strict";
+
+// ANTIPATRON: Inseguro contra ataques XSS y costoso en render
+function renderItemInseguro(tarea, contenedor) {
+  contenedor.innerHTML += `<div class="item">${tarea.titulo}</div>`;
+}
+
+// PATRON RECOMENDADO: Nodos en memoria con sanitizacion nativa
+function renderItemSeguro(tarea, contenedor) {
+  const item = document.createElement("article");
+  item.className = "task-item";
+  item.dataset.id = tarea.id;
+
+  const title = document.createElement("span");
+  title.textContent = tarea.titulo; // 100% inmune a XSS
+
+  const btn = document.createElement("button");
+  btn.className = "btn-delete";
+  btn.textContent = "Eliminar";
+
+  item.append(title, btn);
+  contenedor.appendChild(item);
+}
+\end{lstlisting}
+
+% =========================================================================
+% SECCION 2: ARQUITECTURA DE COMPONENTES REUTILIZABLES
+% =========================================================================
+\sectionBadge{Arquitectura de Componentes Reutilizables en Vanilla JS}
+
+Un componente funcional en Vanilla JavaScript es una función pura que recibe un objeto de propiedades de entrada (\textbf{props}) y retorna un nodo del DOM completamente configurado.
+
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item \textbf{Paso de Props Descendente (\textit{Props Down}):} Los componentes padres transmiten datos hacia los componentes hijos mediante argumentos.
+  \item \textbf{Notificación Ascendente (\textit{Callbacks Up}):} Los componentes hijos nunca mutan el estado central directamente; notifican al padre invocando funciones callback pasadas en sus props (ej. \texttt{onDelete(id)}, \texttt{onToggle(id)}).
+  \item \textbf{Estado Centralizado en el Componente Raíz (\texttt{App}):} Toda la lógica de negocio reside en el componente raíz, garantizando una única fuente de verdad (\textit{Single Source of Truth}).
+\end{itemize}
+
+% =========================================================================
+% SECCION 3: EVENTOS, PROPAGACION Y DELEGACION
+% =========================================================================
+\sectionBadge{Propagación de Eventos y el Patrón de Delegación}
+
+Cuando ocurre una interacción física en el navegador, el evento recorre tres fases formales:
+\begin{enumerate}[label=\arabic*.]
+  \item \textbf{Fase de Captura (\textit{Capturing}):} El evento desciende desde \texttt{window} y \texttt{document} hasta alcanzar el nodo objetivo.
+  \item \textbf{Fase de Destino (\textit{Target}):} Se alcanza el nodo sobre el que se originó el clic (\texttt{event.target}).
+  \item \textbf{Fase de Burbujeo (\textit{Bubbling}):} El evento asciende hacia los ancestros por defecto (\texttt{bubbles: true}).
+\end{enumerate}
+
+\begin{tcolorbox}[colback=icesiBlue!10,colframe=icesiBlue,arc=3pt,title=\textbf{Eficiencia de la Delegación de Eventos}]
+\fontsize{7.5}{9.5}\selectfont
+En lugar de asociar 500 listeners a 500 botones individuales en memoria RAM, registramos \textbf{un único listener en el contenedor padre} (\texttt{<ul>}) y filtramos con \texttt{event.target.closest(".btn-delete")}. Esto soporta automáticamente nuevos elementos creados dinámicamente sin fugas de memoria.
+\end{tcolorbox}
+
+% =========================================================================
+% SECCION 4: ASINCRONIA, PROMESAS Y EL EVENT LOOP
+% =========================================================================
+\sectionBadge{Asincronía: Promesas, Async/Await y Prioridad de Microtareas}
+
+El motor JavaScript ejecuta en un único hilo. Las operaciones asíncronas no bloqueantes se gestionan mediante el \textbf{Event Loop}:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Microtasks (Alta Prioridad):} Las Promesas resueltas (\texttt{.then()}, \texttt{async/await}) entran a la cola de microtareas y se ejecutan inmediatamente apenas se vacía el Call Stack.
+  \item \textbf{Macrotasks (Baja Prioridad):} Los temporizadores (\texttt{setTimeout}) esperan a que la cola de microtareas esté totalmente vacía antes de ejecutarse.
+\end{itemize}
+
+% =========================================================================
+% SECCION 5: ANIMACIONES WEB Y GRAFICOS VECTORIALES SVG
+% =========================================================================
+\sectionBadge{Animaciones con Web Animations API y Trazado SVG}
+
+Para dinamizar la interfaz sin degradar el rendimiento, utilizamos:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Web Animations API (WAAPI):} \texttt{elem.animate([...], \{duration: 300\})} ejecutado sobre \texttt{transform} y \texttt{opacity} en GPU.
+  \item \textbf{Animación Vectorial SVG:} Manipulación de \texttt{stroke-dashoffset} y atributos geométricos interactivos.
+\end{itemize}
+
+% =========================================================================
+% SECCION 6: RETO PRACTICO Y RUBRICA
+% =========================================================================
+\sectionBadge{Reto Práctico: Dashboard DevPulse y Rúbrica Oficial}
+
+Cada equipo construirá la aplicación modular de observabilidad \textbf{DevPulse} en Vanilla JavaScript puro (ES6+) partiendo de un contenedor raíz limpio (\texttt{<div id='root'></div>}).
+
+\textbf{Requerimientos Principales del Proyecto:}
+\begin{itemize}[leftmargin=*,itemsep=1.5pt,topsep=2pt]
+  \item \textbf{Renderizado Dinámico y Seguro:} Renderizar catálogo de microservicios (\texttt{Auth}, \texttt{Payments}, \texttt{DB}) mediante \texttt{createElement()} y \texttt{textContent}, 100\% inmune a XSS. Prohibido \texttt{innerHTML}.
+  \item \textbf{Arquitectura de Componentes Funcionales:} Desacoplamiento en componentes puros (\texttt{ServiceCard}, \texttt{MetricGaugeSVG}, \texttt{FilterBar}) con \textit{Props Down} y \textit{Callbacks Up}.
+  \item \textbf{Delegación de Eventos:} Un único listener delegado sobre el contenedor \texttt{\#services-grid} gestionando acciones de reinicio, cortacircuitos y eliminación con \texttt{closest('[data-action]')}.
+  \item \textbf{Asincronía y Simulación de Fallos:} Servicio de sondeo con Promesas y \texttt{async/await}, controlando estados \textit{Pending} (carga visual), \textit{Fulfilled} y \textit{Rejected} (captura de errores 500/503 con \texttt{try...catch...finally}).
+  \item \textbf{Métricas SVG y Web Animations API:} Gráficos radiales vectoriales SVG con actualización de \texttt{stroke-dashoffset} y animaciones a 60 FPS con \texttt{element.animate()} en GPU.
+\end{itemize}
+
+\vspace{0.10cm}
+
+\noindent
+\textbf{Rúbrica de Evaluación Modularizada (Escala 0.0 a 5.0):}
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{L{3.4cm}C{1.3cm}X}
+\toprule
+\textbf{Criterio} & \textbf{Peso} & \textbf{Indicador de Logro} \\
+\midrule
+\textbf{Manipulación del DOM y Erradicación XSS} & 20\% & Creación 100\% programática con \texttt{createElement()}, inserción segura con \texttt{textContent} y reemplazo atómico con \texttt{replaceChildren()}. Cero XSS. \\
+\rowcolor{icesiLight}
+\textbf{Arquitectura de Componentes y Estado} & 20\% & Componentes funcionales puros desacoplados, flujo Props Down / Callbacks Up y estado centralizado único sin variables globales. \\
+\textbf{Delegación de Eventos y Memoria} & 20\% & Un único listener padre delegado con filtrado mediante \texttt{closest()} y \texttt{matches()}, soportando mutaciones dinámicas sin fugas. \\
+\rowcolor{icesiLight}
+\textbf{Asincronía con Promesas y Async/Await} & 20\% & Control riguroso de estados (Pending, Fulfilled, Rejected), manejo de excepciones con \texttt{try...catch...finally} y simulación de latencia de red. \\
+\textbf{Animaciones WAAPI, SVG y Modo Estricto} & 20\% & Transiciones fluidas a 60 FPS con Web Animations API, medidor radial interactivo SVG y cumplimiento estricto de \texttt{"use strict";}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{0.10cm}
+\begin{tcolorbox}[colback=icesiGreen!10,colframe=icesiGreen,arc=3pt,title=\textbf{Portal Interactivo de Aprendizaje Web}]
+\fontsize{7.5}{9.5}\selectfont
+Este taller cuenta con un simulador interactivo completo en el portal Docusaurus del curso (\texttt{portal/docs/talleres/taller-dom-vanillajs-componentes}), con un Sandbox de código en vivo y simuladores visuales en tiempo real del Event Loop, de la propagación de eventos y del ciclo de vida de componentes.
+\end{tcolorbox}
+
+\end{document}

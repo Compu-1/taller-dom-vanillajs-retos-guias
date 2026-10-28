@@ -1,0 +1,51 @@
+.health-panel {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .health-display {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin: 1rem 0;
+        min-height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+      .health-display.idle { color: #94a3b8; }
+      .health-display.loading {
+        color: #38bdf8;
+        border-color: #0284c7;
+        background: rgba(2, 132, 199, 0.1);
+      }
+      .health-display.success {
+        color: #4ade80;
+        border-color: #16a34a;
+        background: rgba(22, 163, 74, 0.1);
+      }
+      .health-display.error {
+        color: #f87171;
+        border-color: #dc2626;
+        background: rgba(220, 38, 38, 0.1);
+      }
+      .btn-action {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 0.65rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-action:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
