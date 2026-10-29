@@ -21,19 +21,19 @@ function createSafeServiceCard(service) {
   badge.textContent = "● OPERATIVO";
 
   // 3. Título del servicio <h3>
-  // TODO: Asigna el título usando .textContent para neutralizar inyecciones XSS
-  const title = document.createElement("h3");
-  title.textContent = service.name; // ¡textContent neutraliza las etiquetas HTML!
+  // TODO: Crea el elemento <h3> y asigna el título usando .textContent para neutralizar inyecciones XSS
+  // const title = document.createElement("h3");
+  // title.textContent = service.name;
 
   // 4. Detalle métrico <p class="metric-text">
   // TODO: Crea el elemento <p>, asígnale la clase 'metric-text' y su texto
-  const details = document.createElement("p");
-  details.className = "metric-text";
-  details.textContent = `Latencia: ${service.latency} ms | Versión: ${service.version}`;
+  // const details = document.createElement("p");
+  // details.className = "metric-text";
+  // details.textContent = `Latencia: ${service.latency} ms | Versión: ${service.version}`;
 
   // 5. Ensamblar todos los nodos en la tarjeta
-  // TODO: Usa card.append(...) para incluir el badge, title y details
-  card.append(badge, title, details);
+  // TODO: Usa card.append(badge, title, details) para ensamblar los nodos creados
+  card.append(badge);
 
   return card;
 }

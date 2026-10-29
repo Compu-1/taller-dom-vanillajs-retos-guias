@@ -217,7 +217,7 @@ setTimeout(() => {
     if (card && h3 && p && h3.textContent.includes("Auth-Gateway")) {
       console.log("✅ EVALUACIÓN EXITOSA: La tarjeta se montó limpiamente en memoria, 100% inmune a XSS.");
     } else {
-      console.warn("⚠️ Revisa que hayas creado y añadido los elementos h3 y p dentro de card.append().");
+      console.warn("⚠️ Completa los pasos 3, 4 y 5: crea el <h3> con textContent, el <p> y ensámblalos con card.append().");
     }
   }
 }, 100);

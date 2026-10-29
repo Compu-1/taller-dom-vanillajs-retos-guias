@@ -178,6 +178,10 @@
       try {
         
 // --- [HARNESS OCULTO - RESET DEL DOM] ---
+window.__state = {
+  peticionesPorSegundo: 450,
+  erroresDetectados: 3
+};
 const root = document.getElementById("sandbox-root");
 if (root) root.innerHTML = "";
     
@@ -193,10 +197,19 @@ if (root) root.innerHTML = "";
 setTimeout(() => {
   const root = document.getElementById("sandbox-root");
   const cards = root ? root.querySelectorAll(".metric-card") : [];
-  if (cards.length === 2) {
-    console.log("✅ COMPONENTES MONTADOS: 2 tarjetas funcionales creadas con props independientes.");
-  } else {
+  if (cards.length !== 2) {
     console.warn("⚠️ Se esperaban 2 tarjetas .metric-card en el dashboard.");
+    return;
+  }
+  const incBtn = cards[0].querySelector(".btn-primary");
+  const stateRef = window.__state;
+  if (!stateRef) return;
+  const valBefore = stateRef.peticionesPorSegundo;
+  if (incBtn) incBtn.click();
+  if (stateRef.peticionesPorSegundo > valBefore) {
+    console.log("✅ EVALUACIÓN EXITOSA: Callbacks conectados. El componente hijo comunica eventos al padre.");
+  } else {
+    console.warn("⚠️ Conecta los callbacks: registra los addEventListener en incBtn (onIncrement) y resetBtn (onReset).");
   }
 }, 100);
     

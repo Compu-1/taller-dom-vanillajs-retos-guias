@@ -6,7 +6,7 @@ const slider = document.getElementById("cpu-slider");
 const sliderTxt = document.getElementById("slider-txt");
 
 // Constante geométrica: 2 * Math.PI * 42 ≈ 263.89
-const PERIMETRO = 2 * Math.PI * 42;
+const PERIMETRO = window.PERIMETRO || 2 * Math.PI * 42;
 
 /**
  * Reto 5: Web Animations API sobre SVG
@@ -17,29 +17,17 @@ const PERIMETRO = 2 * Math.PI * 42;
 function animateGauge(circleEl, percentage) {
   if (!circleEl) return;
 
-  // 1. Calcular el desfase objetivo
-  const targetOffset = PERIMETRO - (PERIMETRO * percentage) / 100;
+  // TODO 1: Calcular el desfase objetivo (targetOffset)
+  // Fórmula perimétrica: PERIMETRO - (PERIMETRO * percentage) / 100
+  // const targetOffset = ...;
 
-  // 2. Leer el offset actual guardado en dataset (o el perímetro si es el inicio)
-  const currentOffset = parseFloat(circleEl.dataset.offset || PERIMETRO);
+  // TODO 2: Leer el offset previo guardado en dataset (o PERIMETRO si es el inicio)
+  // const currentOffset = parseFloat(circleEl.dataset.offset || PERIMETRO);
 
-  // 3. Ejecutar la Web Animations API nativa (GPU Composited)
-  circleEl.animate([
-    { strokeDashoffset: currentOffset },
-    { strokeDashoffset: targetOffset }
-  ], {
-    duration: 550,
-    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-    fill: "forwards"
-  });
+  // TODO 3: Ejecutar la Web Animations API nativa (GPU Composited)
+  // Usa circleEl.animate([{ strokeDashoffset: currentOffset }, { strokeDashoffset: targetOffset }], { duration: 550, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "forwards" });
 
-  // Guardar estado
-  circleEl.dataset.offset = targetOffset;
-  if (valueLabel) valueLabel.textContent = `${percentage}%`;
-  if (sliderTxt) sliderTxt.textContent = `${percentage}%`;
-
-  // Cambiar color si supera el 85% (alerta)
-  circleEl.style.stroke = percentage > 85 ? "#ef4444" : (percentage > 60 ? "#f59e0b" : "#4cb978");
+  // TODO 4: Guardar circleEl.dataset.offset = targetOffset y actualizar los textos valueLabel y sliderTxt
 }
 
 if (slider) {

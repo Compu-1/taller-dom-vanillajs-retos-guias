@@ -19,23 +19,10 @@ if (servicesList) {
 
     console.log(`🎯 Delegación capturada: acción="${action}" en id="${serviceId}"`);
 
-    // 3. Manejo de acciones
-    if (action === "toggle") {
-      // Alternar estado pausado
-      row.classList.toggle("paused");
-      const isPaused = row.classList.contains("paused");
-      const badge = row.querySelector(".badge-state");
-
-      if (badge) {
-        badge.className = isPaused ? "badge-state offline" : "badge-state online";
-        badge.textContent = isPaused ? "PAUSADO" : "ONLINE";
-      }
-      actionButton.textContent = isPaused ? "Reanudar" : "Pausar";
-    } else if (action === "remove") {
-      // Eliminar la fila del DOM
-      row.remove();
-      console.log(`🗑️ Servicio ${serviceId} eliminado del DOM.`);
-    }
+    // TODO: Maneja las acciones según actionButton.dataset.action:
+    // - Si action === "toggle": alterna la clase "paused" en row (row.classList.toggle("paused")),
+    //   actualiza el badge .badge-state a "PAUSADO" (offline) o "ONLINE" (online), y el texto del botón a "Reanudar"/"Pausar".
+    // - Si action === "remove": elimina la fila del DOM con row.remove()
   });
 }
 

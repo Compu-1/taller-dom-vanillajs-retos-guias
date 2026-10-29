@@ -178,6 +178,7 @@
       try {
         
 // --- [HARNESS OCULTO - SETUP SVG] ---
+window.PERIMETRO = 2 * Math.PI * 42;
 const root = document.getElementById("sandbox-root");
 if (root) {
   root.innerHTML = `
@@ -207,7 +208,13 @@ if (root) {
       try {
         
 setTimeout(() => {
-  console.log("✅ WAAPI EN ACCIÓN: Las animaciones se ejecutan a 60 FPS sin reflow del layout.");
+  const circleEl = document.getElementById("meter-circle");
+  const p = window.PERIMETRO || 263.89;
+  if (circleEl && circleEl.dataset.offset && parseFloat(circleEl.dataset.offset) < p) {
+    console.log("✅ EVALUACIÓN EXITOSA: WAAPI animando a 60 FPS con interpolación perimétrica correcta.");
+  } else {
+    console.warn("⚠️ Completa los TODOs en animateGauge(): calcula targetOffset, ejecuta circleEl.animate() y guarda circleEl.dataset.offset.");
+  }
 }, 100);
     
       } catch(e) {

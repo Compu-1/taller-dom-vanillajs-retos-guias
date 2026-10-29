@@ -5,7 +5,7 @@ const valueLabel = document.getElementById("meter-value");
 const slider = document.getElementById("cpu-slider");
 const sliderTxt = document.getElementById("slider-txt");
 
-const PERIMETRO = 2 * Math.PI * 42;
+const PERIMETRO = window.PERIMETRO || 2 * Math.PI * 42;
 
 function animateGauge(circleEl, percentage) {
   if (!circleEl) return;

@@ -244,7 +244,19 @@ if (root) {
         
 // --- [HARNESS OCULTO - VERIFICACIÓN] ---
 setTimeout(() => {
-  console.log("✅ DELEGACIÓN CONFIGURADA: 1 solo listener en #services-list atiende todas las filas dinámicas.");
+  const list = document.getElementById("services-list");
+  if (!list) return;
+  const firstToggle = list.querySelector("[data-action='toggle']");
+  const firstRow = list.querySelector(".service-row");
+  if (firstToggle && firstRow) {
+    firstToggle.click();
+    if (firstRow.classList.contains("paused")) {
+      console.log("✅ EVALUACIÓN EXITOSA: Delegación configurada. Las acciones 'toggle' y 'remove' operan correctamente.");
+      firstToggle.click();
+    } else {
+      console.warn("⚠️ Completa el TODO dentro del listener: implementa la lógica para action === 'toggle' y action === 'remove'.");
+    }
+  }
 }, 100);
     
       } catch(e) {

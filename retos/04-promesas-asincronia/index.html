@@ -192,9 +192,11 @@ if (root) {
   `;
 }
 
+window.__pingCalled = false;
 window.mockPing = function(endpoint, shouldFail = false) {
+  window.__pingCalled = true;
   return new Promise((resolve, reject) => {
-    const latency = Math.floor(Math.random() * 200 + 150);
+    const latency = 30;
     setTimeout(() => {
       if (shouldFail) {
         reject(new Error("HTTP 503: Service Unavailable (Timeout)"));
@@ -202,7 +204,7 @@ window.mockPing = function(endpoint, shouldFail = false) {
         resolve({
           endpoint,
           status: 200,
-          latencyMs: latency,
+          latencyMs: 145,
           timestamp: new Date().toLocaleTimeString()
         });
       }
@@ -220,7 +222,17 @@ window.mockPing = function(endpoint, shouldFail = false) {
         
 // --- [HARNESS OCULTO] ---
 setTimeout(() => {
-  console.log("✅ ASINCRONÍA LISTA: Manejador async/await con control total de estados.");
+  const btnOk = document.getElementById("btn-check-ok");
+  if (btnOk) {
+    btnOk.click();
+    setTimeout(() => {
+      if (window.__pingCalled) {
+        console.log("✅ EVALUACIÓN EXITOSA: Manejador async/await conectado con mockPing.");
+      } else {
+        console.warn("⚠️ Completa los TODOs: usa await mockPing(endpoint, simulateError), actualiza healthBox en try/catch y restaura el botón en finally.");
+      }
+    }, 60);
+  }
 }, 100);
     
       } catch(e) {

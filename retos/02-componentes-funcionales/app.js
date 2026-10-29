@@ -39,19 +39,13 @@ function createMetricCard({ title, count, unit, onIncrement, onReset }) {
   const incBtn = document.createElement("button");
   incBtn.className = "btn btn-primary";
   incBtn.textContent = "+ Subir";
-  // Asocia el listener para invocar el callback onIncrement()
-  incBtn.addEventListener("click", () => {
-    if (typeof onIncrement === "function") onIncrement();
-  });
+  // TODO: Registra el addEventListener para invocar onIncrement() al hacer clic
 
   // Botón 2: Reiniciar
   const resetBtn = document.createElement("button");
   resetBtn.className = "btn btn-secondary";
   resetBtn.textContent = "Reset";
-  // Asocia el listener para invocar el callback onReset()
-  resetBtn.addEventListener("click", () => {
-    if (typeof onReset === "function") onReset();
-  });
+  // TODO: Registra el addEventListener para invocar onReset() al hacer clic
 
   btnGroup.append(incBtn, resetBtn);
   card.append(titleEl, valueEl, btnGroup);
@@ -61,7 +55,7 @@ function createMetricCard({ title, count, unit, onIncrement, onReset }) {
 // ==========================================
 // 2. CONTROLADOR PADRE (Dueño del Estado)
 // ==========================================
-let state = {
+let state = window.__state || {
   peticionesPorSegundo: 450,
   erroresDetectados: 3
 };

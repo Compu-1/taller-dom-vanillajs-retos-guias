@@ -22,27 +22,21 @@ async function checkHealth(endpoint, simulateError = false) {
     }
     console.log("Iniciando petición asíncrona...");
 
-    // 2. Esperar la Promesa con await
-    const result = await mockPing(endpoint, simulateError);
+    // TODO 1: Espera la resolución de mockPing(endpoint, simulateError) usando 'await'
+    // const result = await ...;
 
-    // 3. Estado FULFILLED: Actualizar DOM con éxito
-    if (healthBox) {
-      healthBox.className = "health-display success";
-      healthBox.textContent = `✅ 200 OK | Latencia: ${result.latencyMs} ms | Hora: ${result.timestamp}`;
-    }
-    console.log("Petición resuelta exitosamente:", result);
+    // TODO 2: Estado FULFILLED: Si la promesa resuelve con éxito, asigna a healthBox:
+    // healthBox.className = "health-display success";
+    // healthBox.textContent = `✅ 200 OK | Latencia: ${result.latencyMs} ms | Hora: ${result.timestamp}`;
 
   } catch (error) {
-    // 4. Estado REJECTED: Capturar error y mostrar alerta
-    if (healthBox) {
-      healthBox.className = "health-display error";
-      healthBox.textContent = `❌ Fallo de red: ${error.message}`;
-    }
+    // TODO 3: Estado REJECTED: Si la promesa falla, captura el error y asigna a healthBox:
+    // healthBox.className = "health-display error";
+    // healthBox.textContent = `❌ Fallo de red: ${error.message}`;
     console.error("Error capturado en el catch:", error.message);
 
   } finally {
-    // 5. Estado FINALLY: Se ejecuta SIEMPRE para restaurar estado
-    if (triggerBtn) triggerBtn.disabled = false;
+    // TODO 4: Estado FINALLY: Re-habilita el botón triggerBtn.disabled = false
     console.log("Ciclo de petición completado.");
   }
 }

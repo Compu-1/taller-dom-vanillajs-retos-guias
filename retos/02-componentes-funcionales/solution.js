@@ -47,7 +47,7 @@ function createMetricCard({ title, count, unit, onIncrement, onReset }) {
 // ==========================================
 // 2. CONTROLADOR PADRE (Dueño del Estado)
 // ==========================================
-let state = {
+let state = window.__state || {
   peticionesPorSegundo: 450,
   erroresDetectados: 3
 };
